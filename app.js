@@ -135,17 +135,57 @@ game.addEventListener("click", () => {
     }
     playStartSequence();
 
+    //start to a function that will play each item in the sequence during the game
     async function playSimone() {
-
+        for (i = 0; i < numberOfRounds; i++) {
+            if (solutionSequence[i] == "R") {
+                await secondstoWait(4000);
+                document.querySelector("#redSq").classList.add("lightred");
+                playSong("sounds/red.wav");
+                await secondstoWait(400);
+                document.querySelector("#redSq").classList.remove("lightred");
+                roundNumber ++;
+                console.log(roundNumber);
+            }
+            else if (solutionSequence[i] == "Y") {
+                document.querySelector("#yellowSq").classList.add("lightyellow");
+                playSong("sounds/yellow.wav");
+                await secondstoWait(400);
+                document.querySelector("#yellowSq").classList.remove("lightyellow");
+                roundNumber ++;
+            }
+            else if (solutionSequence[i] == "G") {
+                document.querySelector("#greenSq").classList.add("lightgreen");
+                playSong("sounds/green.wav");
+                await secondstoWait(400);
+                document.querySelector("#greenSq").classList.remove("lightgreen");
+                roundNumber ++;
+            }
+            else if (solutionSequence[i] == "B") {
+                document.querySelector("#blueSq").classList.add("lightblue");
+                playSong("sounds/blue.wav");
+                await secondstoWait(400);
+                document.querySelector("#blueSq").classList.remove("lightblue");
+                roundNumber ++;
+            }
+        }
     }
     playSimone();
 });
 
 /**
- * Delay lighting up of button and sound played
+ * Delays lighting up of button and sound played
  * @param {number} secondsDelay 
  * @returns a promise object that resolves a delay
  */
 function secondstoWait(secondsDelay) {
     return new Promise((resolve) => setTimeout(resolve, secondsDelay));
+}
+
+/**
+ * Creates a new audio and plays it
+ * @param {string} song 
+ */
+function playSong(song) {
+    (new Audio(song).play());
 }
