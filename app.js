@@ -86,6 +86,7 @@ function incorrectGuess() {
 
 //Testing on a starting sequence to play initially
 let startSequence = ["R","G","R","B","G","R","Y"];
+let solutionSequence = [];
 let game = document.querySelector("#play");
 game.addEventListener("click", () => {
     async function playStartSequence() {
