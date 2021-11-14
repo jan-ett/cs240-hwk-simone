@@ -2,10 +2,14 @@
 let blue = document.querySelector("#blueSq");
 blue.addEventListener("mouseover", () => {
     document.querySelector("#blueSq").classList.add("hover");
+    incorrectGuess();
+
 });
 
 blue.addEventListener("mouseout", () => {
     document.querySelector("#blueSq").classList.remove("hover");
+    document.querySelector("body").style.backgroundColor = "#000000";
+    document.querySelector("#status").innerHTML = "";
 });
 
 //Changes the border of the red button accordingly
@@ -34,3 +38,10 @@ green.addEventListener("mouseover", () => {
 green.addEventListener("mouseout", () => {
     document.querySelector("#greenSq").classList.remove("hover");
 });
+
+
+function incorrectGuess() {
+    document.querySelector("body").style.backgroundColor = "#FF69B4";
+    document.querySelector("#status").innerHTML = "Incorrect! You lose!";
+
+}
