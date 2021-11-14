@@ -72,7 +72,10 @@ green.addEventListener("mouseup", () => {
     (new Audio("sounds/green.wav")).play();
 });
 
-
+/**
+ * Updates the background color to hot pink and updates the message to indicate that the game is over.
+ * wrong and lose sounds are played accordingly.
+ */
 function incorrectGuess() {
     document.querySelector("body").style.backgroundColor = "#FF69B4";
     document.querySelector("#status").innerHTML = "Incorrect! You lose!";
