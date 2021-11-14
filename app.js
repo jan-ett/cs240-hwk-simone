@@ -79,43 +79,45 @@ green.addEventListener("mouseup", () => {
 function incorrectGuess() {
     document.querySelector("body").style.backgroundColor = "#FF69B4";
     document.querySelector("#status").innerHTML = "Incorrect! You lose!";
-    (new Audio("sounds/wrong.wav")).play();
+    (new Audio("sounds/wrong.wav")).play(); //need to fix these sounds to play in the correct order
     (new Audio("sounds/lose.wav")).play();
 
 }
 
 //Testing on a starting sequence to play initially
-let startSequence = ["R","B","G","R","Y"];
-async function playStartSequence() {
-    for (i = 0; i < startSequence.length; i++) {
-        if (startSequence[i] == "R") {
-            document.querySelector("#redSq").classList.add("lightred");
-            await secondstoWait(120);
-            document.querySelector("#redSq").classList.remove("lightred");
-            //(new Audio("sounds/red.wav")).play();
-        }
-        else if (startSequence[i] == "B") {
-            document.querySelector("#blueSq").classList.add("lightblue");
-            await secondstoWait(120);
-            document.querySelector("#blueSq").classList.remove("lightblue");
-            //(new Audio("sounds/blue.wav")).play();
-        }
-        else if (startSequence[i] == "G") {
-            document.querySelector("#greenSq").classList.add("lightgreen");
-            await secondstoWait(120);
-            document.querySelector("#greenSq").classList.remove("lightgreen");
-            //(new Audio("sounds/green.wav")).play();
-        }
-        else if (startSequence[i] == "Y") {
-            document.querySelector("#yellowSq").classList.add("lightyellow");
-            await secondstoWait(120);
-            document.querySelector("#yellowSq").classList.remove("lightyellow");
-            //(new Audio("sounds/yellow.wav")).play();
+let startSequence = ["R","G","R","B","G","R","Y"];
+let game = document.querySelector("#play");
+game.addEventListener("click", () => {
+    async function playStartSequence() {
+        for (i = 0; i < startSequence.length; i++) {
+            if (startSequence[i] == "R") {
+                document.querySelector("#redSq").classList.add("lightred");
+                (new Audio("sounds/red.wav")).play();
+                await secondstoWait(120);
+                document.querySelector("#redSq").classList.remove("lightred");
+            }
+            else if (startSequence[i] == "B") {
+                document.querySelector("#blueSq").classList.add("lightblue");
+                (new Audio("sounds/blue.wav")).play();
+                await secondstoWait(120);
+                document.querySelector("#blueSq").classList.remove("lightblue");
+            }
+            else if (startSequence[i] == "G") {
+                document.querySelector("#greenSq").classList.add("lightgreen");
+                (new Audio("sounds/green.wav")).play();
+                await secondstoWait(120);
+                document.querySelector("#greenSq").classList.remove("lightgreen");
+            }
+            else if (startSequence[i] == "Y") {
+                document.querySelector("#yellowSq").classList.add("lightyellow");
+                (new Audio("sounds/yellow.wav")).play();
+                await secondstoWait(120);
+                document.querySelector("#yellowSq").classList.remove("lightyellow");
+            }
         }
     }
-}
-
-playStartSequence();
+    playStartSequence();
+});
 
 function secondstoWait(secondsDelay) {
     return new Promise((resolve) => setTimeout(resolve, secondsDelay));
