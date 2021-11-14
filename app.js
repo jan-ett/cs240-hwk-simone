@@ -85,25 +85,29 @@ function incorrectGuess() {
 }
 
 //Testing on a starting sequence to play initially
-let startSequence = ["R","B","G","R"];
-function playStartSequence() {
+let startSequence = ["R","B","G","R","Y"];
+async function playStartSequence() {
     for (i = 0; i < startSequence.length; i++) {
         if (startSequence[i] == "R") {
+            await secondstoWait(120);
             document.querySelector("#redSq").classList.add("lightred");
             //document.querySelector("#redSq").classList.remove("lightred");
             //(new Audio("sounds/red.wav")).play();
         }
         else if (startSequence[i] == "B") {
+            await secondstoWait(120);
             document.querySelector("#blueSq").classList.add("lightblue");
             //document.querySelector("#blueSq").classList.remove("lightblue");
             //(new Audio("sounds/blue.wav")).play();
         }
         else if (startSequence[i] == "G") {
+            await secondstoWait(120);
             document.querySelector("#greenSq").classList.add("lightgreen");
             //document.querySelector("#greenSq").classList.remove("lightgreen");
             //(new Audio("sounds/green.wav")).play();
         }
         else if (startSequence[i] == "Y") {
+            await secondstoWait(120);
             document.querySelector("#yellowSq").classList.add("lightyellow");
             //document.querySelector("#yellowSq").classList.remove("lightyellow");
             //(new Audio("sounds/yellow.wav")).play();
@@ -112,3 +116,7 @@ function playStartSequence() {
 }
 
 playStartSequence();
+
+function secondstoWait(secondsDelay) {
+    return new Promise((resolve) => setTimeout(resolve, secondsDelay));
+}
