@@ -2,24 +2,20 @@
 let blue = document.querySelector("#blueSq");
 blue.addEventListener("mouseover", () => {
     document.querySelector("#blueSq").classList.add("hover");
-    incorrectGuess();
-
 });
 
 blue.addEventListener("mouseout", () => {
     document.querySelector("#blueSq").classList.remove("hover");
-    document.querySelector("body").style.backgroundColor = "#000000";
-    document.querySelector("#status").innerHTML = "";
 });
 
 //Causes the blue button to light up and play the corresponding sound when clicked
 blue.addEventListener("mousedown", () => {
     document.querySelector("#blueSq").classList.add("lightblue");
+    incorrectGuess();
 });
 blue.addEventListener("mouseup", () => {
     document.querySelector("#blueSq").classList.remove("lightblue");
-    let audio = new Audio("sounds/blue.wav");
-    audio.play();
+    (new Audio("sounds/blue.wav")).play();
 });
 
 //Changes the border of the red button accordingly
@@ -37,8 +33,7 @@ red.addEventListener("mousedown", () => {
 });
 red.addEventListener("mouseup", () => {
     document.querySelector("#redSq").classList.remove("lightred");
-    let audio = new Audio("sounds/red.wav");
-    audio.play();
+    (new Audio("sounds/red.wav")).play();
 });
 
 //Changes the border of the yellow button accordingly
@@ -56,8 +51,7 @@ yellow.addEventListener("mousedown", () => {
 });
 yellow.addEventListener("mouseup", () => {
     document.querySelector("#yellowSq").classList.remove("lightyellow");
-    let audio = new Audio("sounds/yellow.wav");
-    audio.play();
+    (new Audio("sounds/yellow.wav")).play();
 });
 
 //Changes the border of the green button accordingly
@@ -75,13 +69,14 @@ green.addEventListener("mousedown", () => {
 });
 green.addEventListener("mouseup", () => {
     document.querySelector("#greenSq").classList.remove("lightgreen");
-    let audio = new Audio("sounds/green.wav");
-    audio.play();
+    (new Audio("sounds/green.wav")).play();
 });
 
 
 function incorrectGuess() {
     document.querySelector("body").style.backgroundColor = "#FF69B4";
     document.querySelector("#status").innerHTML = "Incorrect! You lose!";
+    (new Audio("sounds/wrong.wav")).play();
+    (new Audio("sounds/lose.wav")).play();
 
 }
