@@ -86,10 +86,19 @@ function incorrectGuess() {
 
 //Testing on a starting sequence to play initially
 let startSequence = ["R","G","R","B","G","R","Y"]; //stores the start sequnce
-let solutionSequence = []; //stores solution sequence for given rounds
+let solutionSequence = ["R","G","Y"]; //stores solution sequence for given rounds
 
 //creates a game of Simone when the "Play Simone!" button is clicked
 let game = document.querySelector("#play");
+let numberOfRounds = 0; //stores the number of rounds given by the user
+let roundNumber = 0;
+
+//reads in the number of rounds selected by thte user
+let roundInput = document.querySelector("#rounds");
+roundInput.addEventListener("input", () => {
+    numberOfRounds = roundInput.value;
+});
+
 game.addEventListener("click", () => {
     async function playStartSequence() {
         for (i = 0; i < startSequence.length; i++) {
@@ -124,6 +133,11 @@ game.addEventListener("click", () => {
         }
     }
     playStartSequence();
+
+    async function playSimone() {
+
+    }
+    playSimone();
 });
 
 /**
