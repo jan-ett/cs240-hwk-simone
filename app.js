@@ -85,30 +85,36 @@ function incorrectGuess() {
 }
 
 //Testing on a starting sequence to play initially
-let startSequence = ["R","G","R","B","G","R","Y"];
-let solutionSequence = [];
+let startSequence = ["R","G","R","B","G","R","Y"]; //stores the start sequnce
+let solutionSequence = []; //stores solution sequence for given rounds
+
+//creates a game of Simone when the "Play Simone!" button is clicked
 let game = document.querySelector("#play");
 game.addEventListener("click", () => {
     async function playStartSequence() {
         for (i = 0; i < startSequence.length; i++) {
+            //checks to see if the sequence is Red
             if (startSequence[i] == "R") {
                 document.querySelector("#redSq").classList.add("lightred");
                 (new Audio("sounds/red.wav")).play();
                 await secondstoWait(120);
                 document.querySelector("#redSq").classList.remove("lightred");
             }
+            //checks to see if the sequence is Blue
             else if (startSequence[i] == "B") {
                 document.querySelector("#blueSq").classList.add("lightblue");
                 (new Audio("sounds/blue.wav")).play();
                 await secondstoWait(120);
                 document.querySelector("#blueSq").classList.remove("lightblue");
             }
+            //checks to see if the sequence is Green
             else if (startSequence[i] == "G") {
                 document.querySelector("#greenSq").classList.add("lightgreen");
                 (new Audio("sounds/green.wav")).play();
                 await secondstoWait(120);
                 document.querySelector("#greenSq").classList.remove("lightgreen");
             }
+            //checks to see if the sequence is Yellow
             else if (startSequence[i] == "Y") {
                 document.querySelector("#yellowSq").classList.add("lightyellow");
                 (new Audio("sounds/yellow.wav")).play();
@@ -120,6 +126,11 @@ game.addEventListener("click", () => {
     playStartSequence();
 });
 
+/**
+ * Delay lighting up of button and sound played
+ * @param {number} secondsDelay 
+ * @returns a promise object that resolves a delay
+ */
 function secondstoWait(secondsDelay) {
     return new Promise((resolve) => setTimeout(resolve, secondsDelay));
 }
