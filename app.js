@@ -194,12 +194,18 @@ function playSong(song) {
  * Checks to see if the selected button matches the sequence memeber in the current round
  * @param {string} id 
  */
-function checkButtonSelected(id) {
+async function checkButtonSelected(id) {
+    let remainingGuesses = 0;
     if(id == solutionSequence[roundNumber]) {
         roundNumber += 1;
         //only plays the next round sound for all rounds except the last one
         if (roundNumber != solutionSequence.length) {
             (new Audio("sounds/nextRound.wav").play());
+            document.querySelector("#status").innerHTML = "So far so good! " + remainingGuesses + " to go!";
+            document.querySelector("#status").innerHTML = "Good job! Prepare for next round.";
+            await secondstoWait(800);
+            document.querySelector("#status").innerHTML = "Round " + (roundNumber+1) + " of " + solutionSequence.length;
+            await secondstoWait(800);
         }
         else {
             document.querySelector("body").style.backgroundColor = "#00BFFF";
