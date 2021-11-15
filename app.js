@@ -171,8 +171,7 @@ function playSong(song) {
  */
 async function checkButtonSelected(id, guessNumber) {
     if(guessNumber < roundNumber) {
-        let remainingGuesses = 0;
-        console.log(userGuess);
+        let remainingGuesses = (roundNumber-userGuess);
         if (id = solutionSequence[guessNumber]) {
             document.querySelector("#status").innerHTML = "So far so good! " + remainingGuesses + " to go!";
 
@@ -181,15 +180,16 @@ async function checkButtonSelected(id, guessNumber) {
             incorrectGuess();
         }
     }
-    else if (guessNumber == roundNumber && roundNumber != solutionSequence.length) {
+    else if (guessNumber == roundNumber && roundNumber != solutionSequence.length-1) {
         if (id == solutionSequence[roundNumber]) {
+            roundNumber += 1;
             (new Audio("sounds/nextRound.wav").play());
             document.querySelector("#status").innerHTML = "Good job! Prepare for next round.";
             await secondstoWait(800);
             document.querySelector("#status").innerHTML = "Round " + (roundNumber+1) + " of " + solutionSequence.length;
             await secondstoWait(800);
             userGuess = 0;
-            roundNumber += 1;
+            //roundNumber += 1;
             playSequenceSolution();
 
         }
@@ -197,7 +197,7 @@ async function checkButtonSelected(id, guessNumber) {
             incorrectGuess();
         }
     }
-    else if (guessNumber == roundNumber && roundNumber == solutionSequence.length) {
+    else if (guessNumber == roundNumber && roundNumber == solutionSequence.length-1) {
         if (id == solutionSequence[guessNumber]) {
             document.querySelector("body").style.backgroundColor = "#00BFFF";
             document.querySelector("#status").innerHTML = "Yay you win!";
