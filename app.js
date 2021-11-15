@@ -127,37 +127,6 @@ async function playStartSequence() {
 }
     playStartSequence();
 
-    //start to a function that will play each item in the sequence during the game
-    async function playSimone() {
-        for (let i = 0; i < numberOfRounds; i++) {
-            if (solutionSequence[i] == "R") {
-                await secondstoWait(4000);
-                document.querySelector("#redSq").classList.add("lightred");
-                playSong("sounds/red.wav");
-                await secondstoWait(400);
-                document.querySelector("#redSq").classList.remove("lightred");
-            }
-            else if (solutionSequence[i] == "Y") {
-                document.querySelector("#yellowSq").classList.add("lightyellow");
-                playSong("sounds/yellow.wav");
-                await secondstoWait(400);
-                document.querySelector("#yellowSq").classList.remove("lightyellow");
-            }
-            else if (solutionSequence[i] == "G") {
-                document.querySelector("#greenSq").classList.add("lightgreen");
-                playSong("sounds/green.wav");
-                await secondstoWait(400);
-                document.querySelector("#greenSq").classList.remove("lightgreen");
-            }
-            else if (solutionSequence[i] == "B") {
-                document.querySelector("#blueSq").classList.add("lightblue");
-                playSong("sounds/blue.wav");
-                await secondstoWait(400);
-                document.querySelector("#blueSq").classList.remove("lightblue");
-            }
-        }
-    }
-    playSimone();
 });
 
 /**
@@ -195,6 +164,7 @@ function playSong(song) {
  */
 async function checkButtonSelected(id) {
     if(id == solutionSequence[roundNumber]) {
+        playSequenceSolution();
         roundNumber += 1;
         let remainingGuesses = 0;
         //only plays the next round sound for all rounds except the last one
@@ -217,6 +187,36 @@ async function checkButtonSelected(id) {
     }
 }
 
-function playSequenceSolution() {
-    
+/**
+ * Plays the appropriate members of the sequence for each round
+ */
+async function playSequenceSolution() {
+    for (i = 0; i <= roundNumber; i++) {
+        if (solutionSequence[i] == "R") {
+            await secondstoWait(4000);
+            document.querySelector("#redSq").classList.add("lightred");
+            playSong("sounds/red.wav");
+            await secondstoWait(400);
+            document.querySelector("#redSq").classList.remove("lightred");
+        }
+        else if (solutionSequence[i] == "Y") {
+            document.querySelector("#yellowSq").classList.add("lightyellow");
+            playSong("sounds/yellow.wav");
+            await secondstoWait(400);
+            document.querySelector("#yellowSq").classList.remove("lightyellow");
+        }
+        else if (solutionSequence[i] == "G") {
+            document.querySelector("#greenSq").classList.add("lightgreen");
+            playSong("sounds/green.wav");
+            await secondstoWait(400);
+            document.querySelector("#greenSq").classList.remove("lightgreen");
+        }
+        else if (solutionSequence[i] == "B") {
+            document.querySelector("#blueSq").classList.add("lightblue");
+            playSong("sounds/blue.wav");
+            await secondstoWait(400);
+            document.querySelector("#blueSq").classList.remove("lightblue");
+        }
+    }
 }
+playSequenceSolution();
