@@ -1,7 +1,7 @@
 //Testing on a starting sequence to play initially
 let startSequence = ["R","G","R","B","G","R","Y"]; //stores the start sequnce
-let solutionSequence = ["R","G","Y"]; //stores solution sequence for given rounds
-
+let solutionSequence = ["R","G","B","R","Y"]; //stores solution sequence for given rounds
+//["R","G","Y"]
 
 let numberOfRounds = 0; //stores the number of rounds given by the user
 let roundNumber = 0; //stores the current round
@@ -210,9 +210,9 @@ async function checkButtonSelected(id, guessNumber) {
  * Plays the appropriate members of the sequence for each round
  */
 async function playSequenceSolution() {
+    await secondstoWait(4000);
     for (let i = 0; i <= roundNumber; i++) {
         if (solutionSequence[i] == "R") {
-            await secondstoWait(4000);
             document.querySelector("#redSq").classList.add("lightred");
             playSong("sounds/red.wav");
             await secondstoWait(400);
