@@ -4,7 +4,7 @@ let solutionSequence = ["R","G","Y"]; //stores solution sequence for given round
 
 
 let numberOfRounds = 0; //stores the number of rounds given by the user
-let roundNumber = 0;
+let roundNumber = 0; //stores the current round
 
 //reads in the number of rounds selected by thte user
 let roundInput = document.querySelector("#rounds");
@@ -199,7 +199,12 @@ function checkButtonSelected(id) {
         roundNumber += 1;
         //only plays the next round sound for all rounds except the last one
         if (roundNumber != solutionSequence.length) {
-            (new Audio("sounds/nextRound.wav").play())
+            (new Audio("sounds/nextRound.wav").play());
+        }
+        else {
+            document.querySelector("body").style.backgroundColor = "#00BFFF";
+            document.querySelector("#status").innerHTML = "Yay you win!";
+            (new Audio("sounds/win.mp3").play());
         }
     }
     else {
