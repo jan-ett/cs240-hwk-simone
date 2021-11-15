@@ -129,7 +129,6 @@ async function playStartSequence() {
 
     //start to a function that will play each item in the sequence during the game
     async function playSimone() {
-        correctChoice = false;
         for (let i = 0; i < numberOfRounds; i++) {
             if (solutionSequence[i] == "R") {
                 await secondstoWait(4000);
@@ -195,9 +194,9 @@ function playSong(song) {
  * @param {string} id 
  */
 async function checkButtonSelected(id) {
-    let remainingGuesses = 0;
     if(id == solutionSequence[roundNumber]) {
         roundNumber += 1;
+        let remainingGuesses = 0;
         //only plays the next round sound for all rounds except the last one
         if (roundNumber != solutionSequence.length) {
             (new Audio("sounds/nextRound.wav").play());
@@ -216,4 +215,8 @@ async function checkButtonSelected(id) {
     else {
         incorrectGuess();
     }
+}
+
+function playSequenceSolution() {
+    
 }
