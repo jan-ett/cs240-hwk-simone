@@ -102,7 +102,7 @@ roundInput.addEventListener("input", () => {
 let game = document.querySelector("#play");
 game.addEventListener("click", () => {
     async function playStartSequence() {
-        for (i = 0; i < startSequence.length; i++) {
+        for (let i = 0; i < startSequence.length; i++) {
             //checks to see if the sequence is Red
             if (startSequence[i] == "R") {
                 document.querySelector("#redSq").classList.add("lightred");
@@ -137,14 +137,16 @@ game.addEventListener("click", () => {
 
     //start to a function that will play each item in the sequence during the game
     async function playSimone() {
-        for (i = 0; i < numberOfRounds; i++) {
+        for (let i = 0; i < numberOfRounds; i++) {
+            console.log(numberOfRounds);
+            console.log(solutionSequence[i]);
             if (solutionSequence[i] == "R") {
                 await secondstoWait(4000);
                 document.querySelector("#redSq").classList.add("lightred");
                 playSong("sounds/red.wav");
                 await secondstoWait(400);
                 document.querySelector("#redSq").classList.remove("lightred");
-                roundNumber ++;
+                roundNumber += 1;
                 console.log(roundNumber);
             }
             else if (solutionSequence[i] == "Y") {
@@ -152,21 +154,21 @@ game.addEventListener("click", () => {
                 playSong("sounds/yellow.wav");
                 await secondstoWait(400);
                 document.querySelector("#yellowSq").classList.remove("lightyellow");
-                roundNumber ++;
+                roundNumber += 1;
             }
             else if (solutionSequence[i] == "G") {
                 document.querySelector("#greenSq").classList.add("lightgreen");
                 playSong("sounds/green.wav");
                 await secondstoWait(400);
                 document.querySelector("#greenSq").classList.remove("lightgreen");
-                roundNumber ++;
+                roundNumber += 1;
             }
             else if (solutionSequence[i] == "B") {
                 document.querySelector("#blueSq").classList.add("lightblue");
                 playSong("sounds/blue.wav");
                 await secondstoWait(400);
                 document.querySelector("#blueSq").classList.remove("lightblue");
-                roundNumber ++;
+                roundNumber += 1;
             }
         }
     }
