@@ -127,6 +127,8 @@ async function playStartSequence() {
 }
     playStartSequence();
 
+    playSequenceSolution();
+
 });
 
 /**
@@ -157,17 +159,15 @@ function secondstoWait(secondsDelay) {
 function playSong(song) {
     (new Audio(song).play());
 }
-
 /**
  * Checks to see if the selected button matches the sequence memeber in the current round
  * @param {string} id 
  */
 async function checkButtonSelected(id) {
     if(id == solutionSequence[roundNumber]) {
-        playSequenceSolution();
         roundNumber += 1;
+        playSequenceSolution();
         let remainingGuesses = 0;
-        //only plays the next round sound for all rounds except the last one
         if (roundNumber != solutionSequence.length) {
             (new Audio("sounds/nextRound.wav").play());
             document.querySelector("#status").innerHTML = "So far so good! " + remainingGuesses + " to go!";
@@ -191,7 +191,7 @@ async function checkButtonSelected(id) {
  * Plays the appropriate members of the sequence for each round
  */
 async function playSequenceSolution() {
-    for (i = 0; i <= roundNumber; i++) {
+    for (let i = 0; i <= roundNumber; i++) {
         if (solutionSequence[i] == "R") {
             await secondstoWait(4000);
             document.querySelector("#redSq").classList.add("lightred");
@@ -219,4 +219,3 @@ async function playSequenceSolution() {
         }
     }
 }
-playSequenceSolution();
