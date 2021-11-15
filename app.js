@@ -5,6 +5,7 @@ let solutionSequence = ["R","G","Y"]; //stores solution sequence for given round
 
 let numberOfRounds = 0; //stores the number of rounds given by the user
 let roundNumber = 0; //stores the current round
+let userGuess = 0;
 
 //reads in the number of rounds selected by thte user
 let roundInput = document.querySelector("#rounds");
@@ -28,7 +29,8 @@ blue.addEventListener("mouseout", () => {
 //Causes the blue button to light up and play the corresponding sound when clicked
 blue.addEventListener("mousedown", () => {
     document.querySelector("#blueSq").classList.add("lightblue");
-    checkButtonSelected("B");
+    checkButtonSelected("B", userGuess);
+    userGuess ++;
 });
 blue.addEventListener("mouseup", () => {
     document.querySelector("#blueSq").classList.remove("lightblue");
@@ -47,7 +49,8 @@ red.addEventListener("mouseout", () => {
 //Causes the red button to light up and play the corresponding sound when clicked
 red.addEventListener("mousedown", () => {
     document.querySelector("#redSq").classList.add("lightred");
-    checkButtonSelected("R");
+    checkButtonSelected("R", userGuess);
+    userGuess ++;
 
 });
 red.addEventListener("mouseup", () => {
@@ -67,7 +70,8 @@ yellow.addEventListener("mouseout", () => {
 //Causes the yellow button to light up and play the corresponding sound when clicked
 yellow.addEventListener("mousedown", () => {
     document.querySelector("#yellowSq").classList.add("lightyellow");
-    checkButtonSelected("Y");
+    checkButtonSelected("Y", userGuess);
+    userGuess ++;
 });
 yellow.addEventListener("mouseup", () => {
     document.querySelector("#yellowSq").classList.remove("lightyellow");
@@ -86,7 +90,8 @@ green.addEventListener("mouseout", () => {
 //Causes the green button to light up and play the corresponding sound when clicked
 green.addEventListener("mousedown", () => {
     document.querySelector("#greenSq").classList.add("lightgreen");
-    checkButtonSelected("G");
+    checkButtonSelected("G", userGuess);
+    userGuess ++;
 });
 green.addEventListener("mouseup", () => {
     document.querySelector("#greenSq").classList.remove("lightgreen");
@@ -162,28 +167,42 @@ function playSong(song) {
 /**
  * Checks to see if the selected button matches the sequence memeber in the current round
  * @param {string} id 
+ * @param {number} guessNumber
  */
-async function checkButtonSelected(id) {
-    if(id == solutionSequence[roundNumber]) {
-        roundNumber += 1;
-        playSequenceSolution();
+async function checkButtonSelected(id, guessNumber) {
+    if(guessNumber < roundNumber) {
         let remainingGuesses = 0;
-        if (roundNumber != solutionSequence.length) {
-            (new Audio("sounds/nextRound.wav").play());
+        console.log(userGuess);
+        if (id = solutionSequence[guessNumber]) {
             document.querySelector("#status").innerHTML = "So far so good! " + remainingGuesses + " to go!";
+
+        }
+        else {
+            incorrectGuess();
+        }
+    }
+    else if (guessNumber == roundNumber && roundNumber != solutionSequence.length) {
+        if (id == solutionSequence[roundNumber]) {
+            (new Audio("sounds/nextRound.wav").play());
             document.querySelector("#status").innerHTML = "Good job! Prepare for next round.";
             await secondstoWait(800);
             document.querySelector("#status").innerHTML = "Round " + (roundNumber+1) + " of " + solutionSequence.length;
             await secondstoWait(800);
+            userGuess = 0;
+            roundNumber += 1;
+            playSequenceSolution();
+
         }
         else {
+            incorrectGuess();
+        }
+    }
+    else if (guessNumber == roundNumber && roundNumber == solutionSequence.length) {
+        if (id == solutionSequence[guessNumber]) {
             document.querySelector("body").style.backgroundColor = "#00BFFF";
             document.querySelector("#status").innerHTML = "Yay you win!";
             (new Audio("sounds/win.mp3").play());
         }
-    }
-    else {
-        incorrectGuess();
     }
 }
 
