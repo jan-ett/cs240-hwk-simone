@@ -1,3 +1,4 @@
+
 //Testing on a starting sequence to play initially
 let startSequence = ["R","G","R","B","G","R","Y"]; //stores the start sequnce
 let solutionSequence = ["R","G","B","R","Y"]; //stores solution sequence for given rounds
@@ -22,7 +23,10 @@ getStartSequence();
 const axios = require("axios");
 async function getStartSequence() {
     try {
-        let response = await axios.get("http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=start");
+        const hdrs = {
+            headers : { Accept : "application/json"},
+        };
+        let response = await axios.get("http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=start", hdrs);
         startSequence = response.data.sequence;
         console.log(startSequence);
     } catch (error) {
