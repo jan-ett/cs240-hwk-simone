@@ -16,6 +16,20 @@ roundInput.addEventListener("input", () => {
 //creates a game of Simone when the "Play Simone!" button is clicked
 let game = document.querySelector("#play");
 game.addEventListener("click", () => {
+//API requests code begins here
+getStartSequence();
+
+const axios = require("axios");
+async function getStartSequence() {
+    try {
+        let response = await axios.get("http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=start");
+        startSequence = response.data.sequence;
+        console.log(startSequence);
+    } catch (error) {
+        return "Error!";
+    }
+}
+
 //Changes the border of the blue button accordingly
 let blue = document.querySelector("#blueSq");
 blue.addEventListener("mouseover", () => {
