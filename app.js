@@ -35,7 +35,6 @@ async function getStartSequence() {
         let response = await axios.get("http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=start", hdrs);
         startSequence = response.data.sequence;
         playStartSequence();
-        console.log(startSequence);
         return response.data.sequence;
     } catch (error) {
         return "Error!";
@@ -52,9 +51,8 @@ async function getSolutionSequence() {
         const hdrs = {
             headers : { Accept : "application/json"},
         };
-        let response = await axios.get("http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=getSolution&rounds=" + numberOfRounds + "", hdrs);
+        let response = await axios.get("http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=getSolution&rounds=" + numberOfRounds, hdrs);
         solutionSequence = response.data.key;
-        console.log(solutionSequence);
         return response.data.sequence;
     } catch (error) {
         return "Error!";
