@@ -1,7 +1,9 @@
 
 //Testing on a starting sequence to play initially
-let startSequence = ["R","G","R","B","G","R","Y"]; //stores the start sequnce
-let solutionSequence = ["R","G","B","R","Y"]; //stores solution sequence for given rounds
+let startSequence = [];
+//["R","G","R","B","G","R","Y"]; //stores the start sequnce
+let solutionSequence = [];
+//["R","G","B","R","Y"]; //stores solution sequence for given rounds
 //["R","G","Y"]
 
 let numberOfRounds = 0; //stores the number of rounds given by the user
@@ -18,8 +20,6 @@ roundInput.addEventListener("input", () => {
 let game = document.querySelector("#play");
 game.addEventListener("click", () => {
 //API requests code begins here
-getStartSequence();
-
 const axios = require("axios");
 async function getStartSequence() {
     try {
@@ -28,12 +28,29 @@ async function getStartSequence() {
         };
         let response = await axios.get("http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=start", hdrs);
         startSequence = response.data.sequence;
+        playStartSequence();
         console.log(startSequence);
         return response.data.sequence;
     } catch (error) {
         return "Error!";
     }
 }
+getStartSequence();
+
+async function getSolutionSequence() {
+    try {
+        const hdrs = {
+            headers : { Accept : "application/json"},
+        };
+        let response = await axios.get("http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=getSolution&rounds=" + numberOfRounds + "", hdrs);
+        solutionSequence = response.data.sequence;
+        console.log(solutionSequence);
+        return response.data.sequence;
+    } catch (error) {
+        return "Error!";
+    }
+}
+getSolutionSequence();
 
 //Changes the border of the blue button accordingly
 let blue = document.querySelector("#blueSq");
