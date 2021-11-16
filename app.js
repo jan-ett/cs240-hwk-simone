@@ -29,6 +29,7 @@ async function getStartSequence() {
         let response = await axios.get("http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=start", hdrs);
         startSequence = response.data.sequence;
         console.log(startSequence);
+        return response.data.sequence;
     } catch (error) {
         return "Error!";
     }
