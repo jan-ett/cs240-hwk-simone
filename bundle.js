@@ -1,4 +1,5 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+//@author Janett
 
 //Testing on a starting sequence to play initially
 let startSequence = [];//stores the start sequnce
@@ -6,7 +7,7 @@ let solutionSequence = [];//stores solution sequence for given rounds
 
 let numberOfRounds = 0; //stores the number of rounds given by the user
 let roundNumber = 0; //stores the current round
-let userGuess = 0;
+let userGuess = 0; //stores the guess the user is currently on for the rounds
 
 //reads in the number of rounds selected by thte user
 let roundInput = document.querySelector("#rounds");
@@ -19,10 +20,10 @@ let game = document.querySelector("#play");
 game.addEventListener("click", () => {
 
 //API requests code begins here
-const axios = require("axios");
+const axios = require("axios"); //javascript now has access to .get()
 
 /**
- * Makes and API request that returns a start sequence to play at the beginning of the game
+ * Makes an API request that returns a start sequence to play at the beginning of the game
  * @returns start sequence
  */
 async function getStartSequence() {
@@ -40,7 +41,7 @@ async function getStartSequence() {
 getStartSequence();
 
 /**
- * Makes and API request to grap a solution sequence for the user to play along with
+ * Makes an API request to grap a solution sequence for the user to play along with
  * @returns solution sequence
  */
 async function getSolutionSequence() {
@@ -138,6 +139,9 @@ green.addEventListener("mouseup", () => {
     (new Audio("sounds/green.wav")).play();
 });
 
+/**
+ * Given a start sequence, this function will play the correct sounds and press the correct buttons
+ */
 async function playStartSequence() {
     for (let i = 0; i < startSequence.length; i++) {
         //checks to see if the sequence is Red

@@ -1,3 +1,4 @@
+//@author Janett
 
 //Testing on a starting sequence to play initially
 let startSequence = [];//stores the start sequnce
@@ -5,7 +6,7 @@ let solutionSequence = [];//stores solution sequence for given rounds
 
 let numberOfRounds = 0; //stores the number of rounds given by the user
 let roundNumber = 0; //stores the current round
-let userGuess = 0;
+let userGuess = 0; //stores the guess the user is currently on for the rounds
 
 //reads in the number of rounds selected by thte user
 let roundInput = document.querySelector("#rounds");
@@ -18,10 +19,10 @@ let game = document.querySelector("#play");
 game.addEventListener("click", () => {
 
 //API requests code begins here
-const axios = require("axios");
+const axios = require("axios"); //javascript now has access to .get()
 
 /**
- * Makes and API request that returns a start sequence to play at the beginning of the game
+ * Makes an API request that returns a start sequence to play at the beginning of the game
  * @returns start sequence
  */
 async function getStartSequence() {
@@ -39,7 +40,7 @@ async function getStartSequence() {
 getStartSequence();
 
 /**
- * Makes and API request to grap a solution sequence for the user to play along with
+ * Makes an API request to grap a solution sequence for the user to play along with
  * @returns solution sequence
  */
 async function getSolutionSequence() {
@@ -137,6 +138,9 @@ green.addEventListener("mouseup", () => {
     (new Audio("sounds/green.wav")).play();
 });
 
+/**
+ * Given a start sequence, this function will play the correct sounds and press the correct buttons
+ */
 async function playStartSequence() {
     for (let i = 0; i < startSequence.length; i++) {
         //checks to see if the sequence is Red
