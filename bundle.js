@@ -1,11 +1,8 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 
 //Testing on a starting sequence to play initially
-let startSequence = [];
-//["R","G","R","B","G","R","Y"]; //stores the start sequnce
-let solutionSequence = [];
-//["R","G","B","R","Y"]; //stores solution sequence for given rounds
-//["R","G","Y"]
+let startSequence = [];//stores the start sequnce
+let solutionSequence = [];//stores solution sequence for given rounds
 
 let numberOfRounds = 0; //stores the number of rounds given by the user
 let roundNumber = 0; //stores the current round
@@ -175,8 +172,6 @@ async function playStartSequence() {
         }
     }
 }
-    playStartSequence();
-
     playSequenceSolution();
 
 });
@@ -249,13 +244,16 @@ async function checkButtonSelected(id, guessNumber) {
             (new Audio("sounds/win.mp3").play());
         }
     }
+    gameOver();
 }
 
 /**
  * Plays the appropriate members of the sequence for each round
  */
 async function playSequenceSolution() {
-    await secondstoWait(4000);
+    if (roundNumber == 0) {
+        await secondstoWait(4000);
+    }
     for (let i = 0; i <= roundNumber; i++) {
         if (solutionSequence[i] == "R") {
             document.querySelector("#redSq").classList.add("lightred");
@@ -284,6 +282,14 @@ async function playSequenceSolution() {
     }
 }
 
+/**
+ * Displays a game over message to the user if they try clicking buttons after the game has ended
+ */
+function gameOver() {
+    if (userGuess > roundNumber) {
+        document.querySelector("#status").innerHTML = "Game over!";
+    }
+}
 },{"axios":2}],2:[function(require,module,exports){
 module.exports = require('./lib/axios');
 },{"./lib/axios":4}],3:[function(require,module,exports){

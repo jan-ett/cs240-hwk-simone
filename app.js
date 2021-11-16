@@ -1,10 +1,7 @@
 
 //Testing on a starting sequence to play initially
-let startSequence = [];
-//["R","G","R","B","G","R","Y"]; //stores the start sequnce
-let solutionSequence = [];
-//["R","G","B","R","Y"]; //stores solution sequence for given rounds
-//["R","G","Y"]
+let startSequence = [];//stores the start sequnce
+let solutionSequence = [];//stores solution sequence for given rounds
 
 let numberOfRounds = 0; //stores the number of rounds given by the user
 let roundNumber = 0; //stores the current round
@@ -174,8 +171,6 @@ async function playStartSequence() {
         }
     }
 }
-    playStartSequence();
-
     playSequenceSolution();
 
 });
@@ -248,13 +243,16 @@ async function checkButtonSelected(id, guessNumber) {
             (new Audio("sounds/win.mp3").play());
         }
     }
+    gameOver();
 }
 
 /**
  * Plays the appropriate members of the sequence for each round
  */
 async function playSequenceSolution() {
-    await secondstoWait(4000);
+    if (roundNumber == 0) {
+        await secondstoWait(4000);
+    }
     for (let i = 0; i <= roundNumber; i++) {
         if (solutionSequence[i] == "R") {
             document.querySelector("#redSq").classList.add("lightred");
@@ -280,5 +278,14 @@ async function playSequenceSolution() {
             await secondstoWait(400);
             document.querySelector("#blueSq").classList.remove("lightblue");
         }
+    }
+}
+
+/**
+ * Displays a game over message to the user if they try clicking buttons after the game has ended
+ */
+function gameOver() {
+    if (userGuess > roundNumber) {
+        document.querySelector("#status").innerHTML = "Game over!";
     }
 }
