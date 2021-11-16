@@ -260,24 +260,28 @@ async function playSequenceSolution() {
             playSong("sounds/red.wav");
             await secondstoWait(400);
             document.querySelector("#redSq").classList.remove("lightred");
+            await secondstoWait(400);
         }
         else if (solutionSequence[i] == "Y") {
             document.querySelector("#yellowSq").classList.add("lightyellow");
             playSong("sounds/yellow.wav");
             await secondstoWait(400);
             document.querySelector("#yellowSq").classList.remove("lightyellow");
+            await secondstoWait(400);
         }
         else if (solutionSequence[i] == "G") {
             document.querySelector("#greenSq").classList.add("lightgreen");
             playSong("sounds/green.wav");
             await secondstoWait(400);
             document.querySelector("#greenSq").classList.remove("lightgreen");
+            await secondstoWait(400);
         }
         else if (solutionSequence[i] == "B") {
             document.querySelector("#blueSq").classList.add("lightblue");
             playSong("sounds/blue.wav");
             await secondstoWait(400);
             document.querySelector("#blueSq").classList.remove("lightblue");
+            await secondstoWait(400);
         }
     }
 }
