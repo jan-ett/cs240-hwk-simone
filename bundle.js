@@ -20,8 +20,14 @@ roundInput.addEventListener("input", () => {
 //creates a game of Simone when the "Play Simone!" button is clicked
 let game = document.querySelector("#play");
 game.addEventListener("click", () => {
+
 //API requests code begins here
 const axios = require("axios");
+
+/**
+ * Makes and API request that returns a start sequence to play at the beginning of the game
+ * @returns start sequence
+ */
 async function getStartSequence() {
     try {
         const hdrs = {
@@ -38,13 +44,17 @@ async function getStartSequence() {
 }
 getStartSequence();
 
+/**
+ * Makes and API request to grap a solution sequence for the user to play along with
+ * @returns solution sequence
+ */
 async function getSolutionSequence() {
     try {
         const hdrs = {
             headers : { Accept : "application/json"},
         };
         let response = await axios.get("http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=getSolution&rounds=" + numberOfRounds + "", hdrs);
-        solutionSequence = response.data.sequence;
+        solutionSequence = response.data.key;
         console.log(solutionSequence);
         return response.data.sequence;
     } catch (error) {
